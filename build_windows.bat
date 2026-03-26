@@ -3,7 +3,7 @@ setlocal EnableDelayedExpansion
 
 set ARCH_BITS=64
 
-set MSVC_VERSION=2019
+set MSVC_VERSION=2022
 set "MSVC_DIR=%programfiles(x86)%\Microsoft Visual Studio\%MSVC_VERSION%"
 
 rem Import build environment
@@ -21,7 +21,7 @@ call "!MSVC_VCVARS_PATH!"
 
 set QT_DIR=C:\Qt
 set QT_VERSION=6.4.2
-set QT_COMPILER=msvc2019_%ARCH_BITS%
+set QT_COMPILER=msvc2022_%ARCH_BITS%
 set QT_BIN_DIR=%QT_DIR%\%QT_VERSION%\%QT_COMPILER%\bin
 
 rem Download here https://cdn.flipperzero.one/STM32_DFU_USB_Driver.zip
@@ -48,7 +48,7 @@ set VCREDIST_DIR=%QT_DIR%\vcredist
 
 set NSIS="%programfiles(x86)%\NSIS\makensis.exe"
 
-set VCREDIST2019_EXE=%VCREDIST_DIR%\vcredist_msvc%MSVC_VERSION%_x%ARCH_BITS%.exe
+set VCREDIST2022_EXE=%VCREDIST_DIR%\vcredist_msvc%MSVC_VERSION%_x%ARCH_BITS%.exe
 rem Visual C++ 2010 from Qt5 package is outdated and have exe sign from 2014.
 rem It should be replaced with new version that have year 2021 signature, downloaded from Microsoft website
 set VCREDIST2010_EXE=%VCREDIST_DIR%\vcredist_x%ARCH_BITS%.exe
@@ -76,7 +76,7 @@ rem Copy the driver
 xcopy /Y /E /I %STM32_DRIVER_DIR% %DIST_DIR%\"STM32 Driver"
 
 rem Copy Microsoft Visual C++ redistributable packages
-copy /Y %VCREDIST2019_EXE% .
+copy /Y %VCREDIST2022_EXE% .
 copy /Y %VCREDIST2010_EXE% .
 
 if defined SIGNING_TOOL (

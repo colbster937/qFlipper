@@ -20,7 +20,7 @@
   !define /ifndef COMPANY "Flipper Devices Inc."
   !define /ifndef ARCH_BITS 64
   !define UNINSTALL_EXE "$INSTDIR\uninstall.exe"
-  !define VCREDIST2019_EXE "$INSTDIR\vcredist_msvc2019_x${ARCH_BITS}.exe"
+  !define VCREDIST2022_EXE "$INSTDIR\vcredist_msvc2022_x${ARCH_BITS}.exe"
   !define VCREDIST2010_EXE "$INSTDIR\vcredist_x${ARCH_BITS}.exe"
   !define UNINSTALL_REG_PATH "Software\Microsoft\Windows\CurrentVersion\Uninstall\${NAME}"
   !define STM32_DRIVER_PATH "$INSTDIR\STM32 Driver"
@@ -148,13 +148,13 @@ Section "-Main Application"
       DetailPrint "Found Microsoft Visual C++ 2010 Version: $0"
     ${EndIf}
     
-    ; Check if VC2019 installed and install it if not
+    ; Check if VC2022 installed and install it if not
     ReadRegStr $0 HKLM "SOFTWARE\Microsoft\VisualStudio\14.0\VC\Runtimes\x64" "Version"
     ${If} $0 == ""
-      DetailPrint "Microsoft Visual C++ 2019 libs not found. Installing..."
-      ExecWait "${VCREDIST2019_EXE} /install /quiet /norestart"
+      DetailPrint "Microsoft Visual C++ 2022 libs not found. Installing..."
+      ExecWait "${VCREDIST2022_EXE} /install /quiet /norestart"
     ${Else}
-      DetailPrint "Found Microsoft Visual C++ 2015-2019 Version: $0"
+      DetailPrint "Found Microsoft Visual C++ 2015-2022 Version: $0"
     ${EndIf}
     
     WriteUninstaller "${UNINSTALL_EXE}"
@@ -189,7 +189,7 @@ Section "-Cleanup"
     ; Use 64bit registry keys, not WOW6432Node
     SetRegView 64 
 
-	Delete ${VCREDIST2019_EXE}
+	Delete ${VCREDIST2022_EXE}
 	Delete ${VCREDIST2010_EXE}
 	;RMDir /r "${STM32_DRIVER_PATH}"
 

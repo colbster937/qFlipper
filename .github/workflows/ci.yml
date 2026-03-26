@@ -52,7 +52,7 @@ jobs:
           brew tap flipperdevices/homebrew-flipper
           brew unlink libusb
           brew install libusb_universal qt_universal
-          pip3 install dmbuild --break-system-packages
+          pip3 install dmgbuild --break-system-packages
 
       - name: Build application
         run: ./build_mac.sh
