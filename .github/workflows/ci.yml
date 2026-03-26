@@ -50,6 +50,7 @@ jobs:
       - name: Install build dependencies
         run: |
           brew tap flipperdevices/homebrew-flipper
+          brew unlink libusb
           brew install libusb_universal qt_universal
           pip3 install dmbuild --break-system-packages
 
@@ -72,6 +73,9 @@ jobs:
         with:
           submodules: true
           fetch-depth: 0
+
+      - name: Set up MSVC
+        uses: ilammy/msvc-dev-cmd@v1
 
       - name: Build application
         run: .\build_windows.bat

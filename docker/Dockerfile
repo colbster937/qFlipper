@@ -33,6 +33,7 @@ RUN DEBIAN_FRONTEND=noninteractive apt install -y \
     libdrm-dev \
     libx11-xcb-dev \
     libopengl-dev \
+    --allow-releaseinfo-change \
     && apt-get clean && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 RUN echo 'deb http://download.opensuse.org/repositories/home:drunkbatya/xUbuntu_20.04/ /' \
