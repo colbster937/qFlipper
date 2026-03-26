@@ -47,6 +47,12 @@ jobs:
           submodules: true
           fetch-depth: 0
 
+      - name: Install build dependencies
+        run: |
+          brew tap flipperdevices/homebrew-flipper
+          brew install libusb_universal qt_universal
+          pip3 install dmbuild --break-system-packages
+
       - name: Build application
         run: ./build_mac.sh
 
