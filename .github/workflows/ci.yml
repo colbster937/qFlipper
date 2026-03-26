@@ -5,38 +5,38 @@ on:
   workflow_dispatch:
 
 jobs:
-  build_linux:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Set up Docker Buildx
-        uses: docker/setup-buildx-action@v3
-
-      - name: Build and push
-        uses: docker/build-push-action@v5
-        with:
-          push: false
-          context: docker
-          tags: qflipper-build:latest
-          load: true
-          cache-from: type=gha
-          cache-to: type=gha,mode=max
-
-      - name: Build application in docker
-        run: docker run --rm --privileged -v $(pwd):/project qflipper-build:latest /project/build_linux.sh
-
-      - name: Publish application
-        uses: actions/upload-artifact@v4
-        with:
-          name: qFlipper-x86_64.AppImage
-          path: |
-            ./build/qFlipper-x86_64.AppImage
-          if-no-files-found: error
+#  build_linux:
+#    runs-on: ubuntu-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#        with:
+#          submodules: true
+#          fetch-depth: 0
+#
+#      - name: Set up Docker Buildx
+#        uses: docker/setup-buildx-action@v3
+#
+#      - name: Build and push
+#        uses: docker/build-push-action@v5
+#        with:
+#          push: false
+#          context: docker
+#          tags: qflipper-build:latest
+#          load: true
+#          cache-from: type=gha
+#          cache-to: type=gha,mode=max
+#
+#      - name: Build application in docker
+#        run: docker run --rm --privileged -v $(pwd):/project qflipper-build:latest /project/build_linux.sh
+#
+#      - name: Publish application
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: qFlipper-x86_64.AppImage
+#          path: |
+#            ./build/qFlipper-x86_64.AppImage
+#          if-no-files-found: error
 
   build_mac:
     runs-on: macos-latest
@@ -65,26 +65,26 @@ jobs:
             ./build_mac/qflipper.dmg
           if-no-files-found: error
 
-  build_windows:
-    runs-on: windows-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-        with:
-          submodules: true
-          fetch-depth: 0
-
-      - name: Set up MSVC
-        uses: ilammy/msvc-dev-cmd@v1
-
-      - name: Build application
-        run: .\build_windows.bat
-
-      - name: Publish application
-        uses: actions/upload-artifact@v4
-        with:
-          name: qFlipperSetup-64bit.exe
-          path: |
-            .\build\qFlipperSetup-64bit.exe
-            .\build\qFlipper-64bit.zip
-          if-no-files-found: error
+#  build_windows:
+#    runs-on: windows-latest
+#    steps:
+#      - name: Checkout code
+#        uses: actions/checkout@v4
+#        with:
+#          submodules: true
+#          fetch-depth: 0
+#
+#      - name: Set up MSVC
+#        uses: ilammy/msvc-dev-cmd@v1
+#
+#      - name: Build application
+#        run: .\build_windows.bat
+#
+#      - name: Publish application
+#        uses: actions/upload-artifact@v4
+#        with:
+#          name: qFlipperSetup-64bit.exe
+#          path: |
+#            .\build\qFlipperSetup-64bit.exe
+#            .\build\qFlipper-64bit.zip
+#          if-no-files-found: error
